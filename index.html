@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For my Valentine 💗 – period comfort</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', 'Comic Sans MS', 'cursive', sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ffd0e4 0%, #ffe4f0 70%, #fff0f5 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        /* main book / card container */
+        .storybook {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 48px 48px 32px 32px;
+            box-shadow: 0 25px 40px rgba(231, 120, 160, 0.25), 0 10px 15px rgba(255, 140, 200, 0.3), inset 0 2px 8px white;
+            border: 2px solid #ffb3c6;
+            overflow: hidden;
+            padding: 2rem 1.8rem 2.5rem 1.8rem;
+            transition: all 0.3s ease;
+        }
+        /* each page = section */
+        .page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: softGlow 1.2s ease;
+        }
+        .page.active-page {
+            display: flex;
+        }
+        @keyframes softGlow {
+            0% { opacity: 0.3; transform: scale(0.97); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        h1, h2 {
+            font-weight: 600;
+            font-size: 2.2rem;
+            background: linear-gradient(130deg, #d44e7c, #b3406a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 10px #ffb8d2;
+            margin: 0.5rem 0 0.2rem;
+            letter-spacing: -0.5px;
+        }
+        h2 { font-size: 1.8rem; }
+        .cute-message {
+            background: #fff9fc;
+            border-radius: 60px 60px 60px 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 3px dashed #ff90b5;
+            color: #a1355c;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            box-shadow: 0 6px 0 #ffb8cf;
+            width: 100%;
+        }
+        .joke-box {
+            background: #fee1e9;
+            border-radius: 30px;
+            padding: 1.4rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #831f4a;
+            border: 3px solid #ffafc0;
+            margin: 1rem 0 2rem;
+            width: 100%;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .joke-box:hover {
+            transform: scale(1.02) rotate(0.5deg);
+            background: #ffd5e2;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin: 20px 0 10px;
+        }
+        .nav-btn {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #b3446c;
+            box-shadow: 0 8px 0 #dd9eb3, 0 4px 12px #ffb8c9;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            border: 2px solid #ffbfd4;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #dd9eb3;
+        }
+        .option-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin: 25px 0 20px;
+        }
+        .option-card {
+            background: #ffeef4;
+            padding: 16px 18px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ad3d64;
+            border: 3px solid #ffa5c0;
+            box-shadow: 0 6px 0 #ffb7ca;
+            cursor: pointer;
+            transition: 0.1s;
+            flex: 0 1 auto;
+            min-width: 140px;
+        }
+        .option-card:active {
+            transform: translateY(5px);
+            box-shadow: 0 1px 0 #ffb7ca;
+        }
+        .period-img {
+            max-width: 90%;
+            border-radius: 40px;
+            border: 8px solid white;
+            box-shadow: 0 20px 25px #fbb0c6;
+            margin: 20px 0 25px;
+            transition: 0.3s;
+        }
+        .period-img:hover {
+            transform: scale(1.02);
+        }
+        .heart-badge {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 6px 6px #ffa5c0);
+            margin: 10px;
+        }
+        .distancer {
+            font-style: italic;
+            background: #ffddea;
+            padding: 8px 20px;
+            border-radius: 80px;
+            color: #b3456b;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        footer {
+            margin-top: 20px;
+            color: #b34773;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        /* small decorations */
+        .candy-emoji {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        /* audio player styling */
+        .voice-note {
+            background: #ffc1cc;
+            border-radius: 60px;
+            padding: 20px;
+            margin: 20px 0;
+            width: 100%;
+            border: 4px solid white;
+        }
+        .voice-note audio {
+            width: 100%;
+            border-radius: 40px;
+            outline: none;
+        }
+        .voice-note p {
+            color: #a13057;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="storybook">
+        <!-- PAGE 1 - welcome / home -->
+        <div id="page1" class="page active-page">
+            <span class="heart-badge">🍓❤️‍🩹🍫</span>
+            <h1>Happy Valentine's, sweetheart ❤️</h1>
+            <div class="distancer">even 3000 miles apart, I'm right there with you</div>
+            <div class="cute-message">
+                <p>🌸 My love, I know your body is working hard right now. <br> 
+                I wish i could bring you a warm hug, your favourite chocolate, and a heating pad...<br>
+                but since i can't, i made this little corner just for you 🤗💕</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="goToPage(2)">💝 comfort zone</button>
+                <button class="nav-btn" onclick="goToPage(3)">😂 jokes for cramps</button>
+                <button class="nav-btn" onclick="goToPage(4)">🌺 page of options</button>
+                <button class="nav-btn" onclick="goToPage(5)">📸 last page</button>
+            </div>
+            <div class="candy-emoji">🍬 🍡 🍭 🍫 🍵</div>
+            <p style="margin-top: 20px; color:#c95f85;"><3</p>
+        </div>
+
+        <!-- PAGE 2 - comfort / cute words -->
+        <div id="page2" class="page">
+            <h2>💞 for your body & soul</h2>
+            <div class="cute-message" style="background: #ffe2f0;">
+                <p>🐇 you're allowed to rest. you're allowed to eat all the chocolate (i wish i could send u some too:( Mwahh...). <br>
+                you're allowed to feel grumpy, sad, or like a crying bunny. <br>
+                i'm here, even if through a screen. <br>
+                <span style="font-size: 1.6rem;">💖 i love you 💖</span></p>
+            </div>
+            <div class="option-grid">
+                <div class="option-card" onclick="showMiniIdea('heatpack')">🔥 heatpack hug</div>
+                <div class="option-card" onclick="showMiniIdea('tea')">🍵 magical tea</div>
+                <div class="option-card" onclick="showMiniIdea('movie')">🎬 movie snuggles</div>
+            </div>
+            <div id="miniIdeaDisplay" style="background: #ffe2e9; width:100%; border-radius: 30px; padding: 15px; margin: 15px 0; font-size:1.2rem; min-height: 70px; color:#972b57; border: 2px solid #ffb0c3;">
+                💬 click any button — i'll send you a virtual hug
+            </div>
+            <button class="nav-btn" onclick="goToPage(1)">« back home</button>
+        </div>
+
+        <!-- PAGE 3 - jokes & play (ALL NEW JOKES + KNOCK KNOCK) -->
+        <div id="page3" class="page">
+            <h2>😂 cramps killer: laughs</h2>
+            <div class="joke-box" id="jokeDisplay">
+                why do we tell actors to "break a leg?" 🤔
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="newJoke()">🎲 another joke baby</button>
+            </div>
+            <div style="margin: 15px 0;">
+                <p style="font-size:1.5rem;">👻 knock knock jokes?</p>
+                <div class="option-card" style="background: #ffe0eb;" onclick="knockKnock()">surprise me, love</div>
+                <div id="knockReply" style="margin: 20px; background: white; border-radius: 50px; padding: 10px; color:#b33b64;">ready to play?</div>
+            </div>
+            <button class="nav-btn" onclick="goToPage(1)">« back home</button>
+        </div>
+
+        <!-- PAGE 4 - extra options (replaced playlist & cats with voice note + cuddle checklist) -->
+        <div id="page4" class="page">
+            <h2>🍭 pick your distraction</h2>
+            <div class="option-grid">
+                <div class="option-card" onclick="goToSpecial('voice')">🎤 my voice note</div>
+                <div class="option-card" onclick="goToSpecial('breathing')">🌬️ breathe with me</div>
+                <div class="option-card" onclick="goToSpecial('letter')">💌 a tiny letter</div>
+                <div class="option-card" onclick="goToSpecial('cuddles')">🧸 cuddle checklist</div>
+            </div>
+            <div id="specialContent" style="background: #ffdde8; border-radius: 40px; padding: 25px; margin: 25px 0; width:100%; border: 4px dotted #ff9ebc;">
+                💫 you're magic. choose something lovely.
+            </div>
+            <button class="nav-btn" onclick="goToPage(1)">« back home</button>
+        </div>
+
+        <!-- PAGE 5 - last page with period.PNG -->
+        <div id="page5" class="page">
+            <h2>🐣 you + me = endless love</h2>
+            <!-- here is your image: period.PNG (i added extra cute border) -->
+            <img src="period.PNG" alt="us / my girl" class="period-img" onerror="this.src='https://placekitten.com/400/300?image=12'; this.alt='cute kitty placeholder (period.PNG not found)'">
+            <div class="cute-message" style="padding: 1rem;">
+                <p>i wish i could be next to you, holding you. <br> 
+                but my heart is always with you my sweet Mariamm. <br>
+                <span style="font-size:2rem;">🍓❤️</span> <br> 
+                happy valentine's day, my strong girl.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="goToPage(1)">🏡 home</button>
+                <button class="nav-btn" onclick="blowKiss()">💋 blow a kiss</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>made with period cramps & lots of love for you ❤️ long distance sucks but we rock</footer>
+
+    <script>
+        // simple page routing
+        function goToPage(pageNumber) {
+            // hide all pages
+            document.querySelectorAll('.page').forEach(p => {
+                p.classList.remove('active-page');
+            });
+            // show selected
+            const activePage = document.getElementById('page' + pageNumber);
+            if (activePage) activePage.classList.add('active-page');
+        }
+
+        // page2 mini interactive ideas
+        function showMiniIdea(type) {
+            const display = document.getElementById('miniIdeaDisplay');
+            if (type === 'heatpack') {
+                display.innerHTML = '🔥🔥 imagine my arms wrapped around your belly. warm, gentle pressure. i’m right here holding you my sweet baby. 💞';
+            } else if (type === 'tea') {
+                display.innerHTML = '🍵 brewing your favourite: Nutella & Rehman made tea :3. adding extra love. steam hugs your face. (i wish i could hand it to you) ✨';
+            } else if (type === 'movie') {
+                display.innerHTML = '🎬 netflix marathon? we can video call and watch the same silly romcoms all night hehe. i’ll bring blankies. 🛋️';
+            }
+        }
+
+        // ================== NEW JOKES (unfunny but funny) ==================
+        const jokeList = [
+            'what do you call a bear with no teeth? 🐻 → a gummy bear! 😄',
+            'why did the scarecrow win an award? 🌾 → because he was outstanding in his field!',
+            'what do you call a sleeping dinosaur? 🦖 → a dino-snore! 🦕',
+            'why don’t eggs tell jokes? 🥚 → they’d crack each other up!',
+            'what do you call a fake noodle? 🍝 → an impasta!',
+            'why did the cookie go to the doctor? 🍪 → because it felt crumb-y!',
+            'what do you call a cow with no legs? 🐄 → ground beef!',
+            'why can’t you give elsa a balloon? 🎈 → because she will let it go!',
+            'what do you call a fish with no eyes? 🐠 → a fsh! (get it? no i’s)',
+            'why did the math book look so sad? 📘 → because it had too many problems!'
+        ];
+        function newJoke() {
+            const randomIndex = Math.floor(Math.random() * jokeList.length);
+            document.getElementById('jokeDisplay').innerText = jokeList[randomIndex];
+        }
+
+        // ================== NEW KNOCK KNOCK JOKES (sweet & silly) ==================
+        function knockKnock() {
+            const knockReplies = [
+                'Knock knock. who’s there? 🦋 Olive. Olive who? Olive you and I miss you!',
+                'Knock knock. who’s there? 🐑 A little lamb. A little lamb who? A little lamb misses you, can I come in?',
+                'Knock knock. who’s there? 🍪 Cookie. Cookie who? Cookie monster says you’re the sweetest!',
+                'Knock knock. who’s there? 👶 Yoda. Yoda who? Yoda one for me, baby!',
+                'Knock knock. who’s there? 🐌 Snail. Snail who? Snail mail — but i got here faster because i love you!',
+                'Knock knock. who’s there? 💋 Kiss. Kiss who? Kiss me, I’m (not) Irish, just your Valentine!'
+            ];
+            document.getElementById('knockReply').innerText = knockReplies[Math.floor(Math.random() * knockReplies.length)];
+        }
+
+        // page4 special options (voice note + new stuff)
+        function goToSpecial(option) {
+            const specialDiv = document.getElementById('specialContent');
+            if (option === 'voice') {
+                // Added your voice note player (replace the src with your file)
+                specialDiv.innerHTML = `
+                    <div class="voice-note">
+                        <p>🎤 a message i saved just for you, my Mariam ❤️</p>
+                        <audio controls>
+                            <source src="my-voice-note.m4a" type="audio/mpeg">
+                            your browser doesn't support audio — but imagine my voice saying "i love you"
+                        </audio>
+                        <p style="font-size:1rem; margin-top:10px;">(from months ago, but still all true)</p>
+                    </div>
+                `;
+            } else if (option === 'breathing') {
+                specialDiv.innerHTML = '🌬️ let’s breathe together: inhale 4 sec, hold 4, exhale 6. <br> 💫 i’m doing it with you right now. in…. out…. 💫';
+            } else if (option === 'letter') {
+                specialDiv.innerHTML = '💌 My dear Mariam, <br> you are so strong. even when you feel weak, you shine. even when you feel dull, You r THE MOST BEAUTIFUL GIRL EVER, i miss you extra today. i can’t wait until we’re together and i can bring your favourite chocolates, and some pulao and we shop together, hehe i love you so much. forever yours, Rehmi. ✨';
+            } else if (option === 'cuddles') {
+                specialDiv.innerHTML = '🧸 today\'s cuddle checklist: <br> ✓ 3 warm thoughts of us <br> ✓ 2 deep breaths with my name <br> ✓ 1 cozy blanket burrito <br> ✓ unlimited virtual forehead kisses 💋';
+            }
+        }
+
+        // page5 extra kiss effect
+        function blowKiss() {
+            alert('💋💋💋 MWAH! i caught a kiss from you! sending millions back 😘😘😘');
+        }
+
+        // set default joke
+        window.onload = function() {
+            newJoke(); // initial joke
+        };
+    </script>
+    <!-- note: replace "my-voice-note.m4a" with your actual audio file name (e.g., "valentine-message.m4a") -->
+    <!-- also if period.PNG not found, shows placeholder but you have it -->
+</body>
+</html>
