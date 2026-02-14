@@ -49,6 +49,15 @@
             0% { opacity: 0.3; transform: scale(0.97); }
             100% { opacity: 1; transform: scale(1); }
         }
+        @keyframes hug {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .hug-animation {
+            animation: hug 0.5s ease;
+            display: inline-block;
+        }
         h1, h2 {
             font-weight: 600;
             font-size: 2.2rem;
@@ -197,6 +206,19 @@
             font-weight: 600;
             margin-bottom: 10px;
         }
+        /* pain level button styles */
+        .pain-btn {
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            min-width: 60px;
+        }
+        .pain-btn:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -206,6 +228,14 @@
             <span class="heart-badge">🍓❤️‍🩹🍫</span>
             <h1>Happy Valentine's, sweetheart ❤️</h1>
             <div class="distancer">even 3000 miles apart, I'm right there with you</div>
+            
+            <!-- CUTE TIMER -->
+            <div style="background: #ffe4f0; border-radius: 30px; padding: 15px; margin: 15px 0; width:100%;">
+                <p>⏰ next time I'll text you:</p>
+                <p style="font-size: 2rem; color:#d44e7c;">💬 SOON</p>
+                <p>(I miss you already)</p>
+            </div>
+            
             <div class="cute-message">
                 <p>🌸 My love, I know your body is working hard right now. <br> 
                 I wish i could bring you a warm hug, your favourite chocolate, and a heating pad...<br>
@@ -224,12 +254,37 @@
         <!-- PAGE 2 - comfort / cute words -->
         <div id="page2" class="page">
             <h2>💞 for your body & soul</h2>
+            
+            <!-- PERIOD PAIN TRACKER -->
+            <div style="background: #fff0f5; border-radius: 40px; padding: 20px; margin: 20px 0; width:100%;">
+                <p style="font-size:1.3rem; color:#b3446c;">🌸 How bad is it today baby?</p>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="showPainLevel(1)" class="pain-btn" style="background: #ffe0e7;">😊</button>
+                    <button onclick="showPainLevel(2)" class="pain-btn" style="background: #ffd0dc;">😐</button>
+                    <button onclick="showPainLevel(3)" class="pain-btn" style="background: #ffc0d0;">😣</button>
+                    <button onclick="showPainLevel(4)" class="pain-btn" style="background: #ffb0c4;">😫</button>
+                    <button onclick="showPainLevel(5)" class="pain-btn" style="background: #ffa0b8;">😭</button>
+                </div>
+                <div id="painResponse" style="margin-top: 15px; font-size: 1.2rem; color:#a1355c; min-height: 50px;">
+                    click how you feel baby
+                </div>
+            </div>
+            
             <div class="cute-message" style="background: #ffe2f0;">
                 <p>🐇 you're allowed to rest. you're allowed to eat all the chocolate (i wish i could send u some too:( Mwahh...). <br>
                 you're allowed to feel grumpy, sad, or like a crying bunny. <br>
                 i'm here, even if through a screen. <br>
                 <span style="font-size: 1.6rem;">💖 i love you 💖</span></p>
             </div>
+            
+            <!-- VIRTUAL HUG BUTTON -->
+            <div style="text-align: center; margin: 20px 0; width:100%;">
+                <button onclick="sendHug()" style="background: #ffb6c1; border: none; padding: 20px 40px; border-radius: 50px; font-size: 1.5rem; box-shadow: 0 5px 0 #d48c9c; cursor: pointer;">
+                    🤗 SEND VIRTUAL HUG
+                </button>
+                <div id="hugCount" style="margin-top: 10px; font-size: 1.2rem;">Hugs sent: 0</div>
+            </div>
+            
             <div class="option-grid">
                 <div class="option-card" onclick="showMiniIdea('heatpack')">🔥 heatpack hug</div>
                 <div class="option-card" onclick="showMiniIdea('tea')">🍵 magical tea</div>
@@ -253,25 +308,43 @@
             <div style="margin: 15px 0;">
                 <p style="font-size:1.5rem;">👻 knock knock jokes?</p>
                 <div class="option-card" style="background: #ffe0eb;" onclick="knockKnock()">surprise me, love</div>
-                <div id="knockReply" style="margin: 20px; background: white; border-radius: 50px; padding: 10px; color:#b33b64;">ready to play?</div>
+                <div id="knockReply" style="margin: 20px; background: white; border-radius: 50px; padding: 10px; color:#b33b64; min-height: 60px;">ready to play?</div>
             </div>
             <button class="nav-btn" onclick="goToPage(1)">« back home</button>
         </div>
 
-        <!-- PAGE 4 - VOICE NOTE PAGE (4 METHODS) -->
+        <!-- PAGE 4 - VOICE NOTE PAGE + CUTE NOTES -->
         <div id="page4" class="page">
             <h2>🎤 hear my voice sweetheart</h2>
             
             <!-- METHOD 1: SoundCloud Embed -->
             <div style="background: #ffd5e2; border-radius: 30px; padding: 15px; margin: 15px 0; width: 100%;">
-                <p style="font-size:1.2rem; color:#a13057; font-weight:bold;">🎵 Something from my heart for u baby</p>
+                <p style="font-size:1.2rem; color:#a13057; font-weight:bold;">🎵 something from my heart for u baby</p>
                 <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
                         src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2266537652&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=false">
                 </iframe>
                 <p style="font-size:0.9rem; margin-top:5px;">⬆️ Press play button above ⬆️</p>
             </div>
             
+            <!-- CUTE NOTES SECTION -->
+            <div style="background: #fff0f5; border-radius: 40px; padding: 20px; margin: 15px 0; width:100%;">
+                <p style="font-size:1.3rem;">💌 pull a sweet note:</p>
+                <div class="option-grid">
+                    <div class="option-card" onclick="showNote()">🌸 random note</div>
+                    <div class="option-card" onclick="showNote()">💕 another one</div>
+                    <div class="option-card" onclick="showNote()">🍫 one more</div>
+                </div>
+                <div id="noteDisplay" style="background: white; border-radius: 30px; padding: 20px; margin-top: 15px; min-height: 80px;">
+                    click a note baby ❤️
+                </div>
+            </div>
             
+            <!-- SECRET LOVE LETTER -->
+            <div style="background: #ffe0f0; border-radius: 30px; padding: 20px; margin: 20px 0; width:100%;">
+                <p>✨ type your name for a secret message:</p>
+                <input type="text" id="nameInput" placeholder="type here..." style="padding: 10px; border-radius: 30px; border: 2px solid #ffb6c1; width: 80%; margin: 10px 0;">
+                <button onclick="showSecret()" style="background: #ffb6c1; border: none; padding: 10px 20px; border-radius: 30px; margin-top: 10px; cursor: pointer;">get secret</button>
+                <div id="secretMessage" style="margin-top: 15px; font-size: 1.2rem; min-height: 60px;"></div>
             </div>
             
             <!-- Extra comfort options -->
@@ -284,24 +357,73 @@
                 </div>
             </div>
             
-            <div id="specialContent" style="background: #ffdde8; border-radius: 40px; padding: 25px; margin: 25px 0; width:100%; border: 4px dotted #ff9ebc;">
+            <div id="specialContent" style="background: #ffdde8; border-radius: 40px; padding: 25px; margin: 25px 0; width:100%; border: 4px dotted #ff9ebc; min-height: 100px;">
                 💫 you're magic. choose something lovely.
             </div>
             
             <button class="nav-btn" onclick="goToPage(1)">« back home</button>
         </div>
 
-        <!-- PAGE 5 - last page with period.PNG -->
+        <!-- PAGE 5 - last page with ALL THE THINGS -->
         <div id="page5" class="page">
             <h2>🐣 you + me = endless love</h2>
+            
+            <!-- KETCHUP MAYO LOVE ❤️ -->
+            <div style="background: #fff0e0; border-radius: 30px; padding: 15px; margin: 10px 0; width:100%;">
+                <p style="font-size:1.2rem;">🍟 ketchup + mayo = you + me 🫶</p>
+                <div style="display: flex; justify-content: center; gap: 10px; font-size: 2rem;">
+                    <span>🔴</span><span>➕</span><span>⚪</span><span>❤️</span><span>👩‍❤️‍👨</span>
+                </div>
+                <p>perfect mix, just like us baby!</p>
+            </div>
+            
+            <!-- DISTANCE COUNTER -->
+            <div style="background: #ffe4f0; border-radius: 30px; padding: 15px; margin: 10px 0; width:100%;">
+                <p style="font-size:1.1rem;">🌍 We are <span style="font-size:2rem; color:#d44e7c;">3000</span> miles apart</p>
+                <p>but my heart is <span style="font-size:1.5rem;">❤️</span> next to you</p>
+                <p style="font-size:0.9rem;">Every mile = 1 more kiss when we meet!</p>
+            </div>
+            
             <!-- here is your image: period.PNG -->
             <img src="period.PNG" alt="us / my girl" class="period-img" onerror="this.src='https://placekitten.com/400/300?image=12'; this.alt='cute kitty placeholder (period.PNG not found)'">
+            
             <div class="cute-message" style="padding: 1rem;">
                 <p>i wish i could be next to you, holding you. <br> 
                 but my heart is always with you my sweet Mariamm. <br>
                 <span style="font-size:2rem;">🍓❤️</span> <br> 
                 happy valentine's day, my strong girl.</p>
             </div>
+            
+            <!-- REASONS I LOVE YOU -->
+            <div style="background: #ffd9e6; border-radius: 30px; padding: 20px; margin: 20px 0; width:100%;">
+                <p style="font-size:1.4rem;">💝 10 reasons I love you:</p>
+                <div style="text-align: left; padding: 10px;">
+                    <p>1. your smile ✨</p>
+                    <p>2. your laugh 😊</p>
+                    <p>3. how strong you are 💪</p>
+                    <p>4. your cute nose 👃</p>
+                    <p>5. the way you say my name 🥰</p>
+                    <p>6. your kindness 🌸</p>
+                    <p>7. your silly jokes 🤪</p>
+                    <p>8. your beautiful eyes 👀</p>
+                    <p>9. how you understand me 💞</p>
+                    <p>10. EVERYTHING about you ❤️</p>
+                </div>
+            </div>
+            
+            <!-- FUTURE DATE IDEAS -->
+            <div style="background: #ffe0f0; border-radius: 40px; padding: 20px; margin: 20px 0; width:100%;">
+                <p style="font-size:1.3rem;">🎯 when we meet, I'll:</p>
+                <div style="display: flex; flex-direction: column; gap: 10px; text-align: left; padding-left: 20px;">
+                    <span>🍫 bring you ALL the chocolate</span>
+                    <span>🎁 surprise you with gifts</span>
+                    <span>☕ make you tea every morning</span>
+                    <span>🤗 hug you for 24 hours straight</span>
+                    <span>💋 kiss your forehead 100 times</span>
+                    <span>🍟 bring snacks with ketchup + mayo</span>
+                </div>
+            </div>
+            
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="goToPage(1)">🏡 home</button>
                 <button class="nav-btn" onclick="blowKiss()">💋 blow a kiss</button>
@@ -331,6 +453,26 @@
             } else if (type === 'movie') {
                 display.innerHTML = '🎬 netflix marathon? we can video call and watch the same silly romcoms all night hehe. i’ll bring blankies. 🛋️';
             }
+        }
+
+        // PAIN LEVEL FUNCTION
+        function showPainLevel(level) {
+            const responses = {
+                1: "😊 Mild day! Still sending hugs! You're doing great baby!",
+                2: "😐 Medium pain - take a break, rest, drink water my love",
+                3: "😣 That hurts - heating pad time! I wish i could bring it to you",
+                4: "😫 So bad - I wish I could hold you and make it better",
+                5: "😭 Worst day - you're so strong my love, i'm right here with you"
+            };
+            document.getElementById('painResponse').innerHTML = responses[level] + " 💕";
+        }
+
+        // HUG COUNTER
+        let hugCounter = 0;
+        function sendHug() {
+            hugCounter++;
+            document.getElementById('hugCount').innerHTML = `Hugs sent: ${hugCounter}`;
+            alert("🤗 VIRTUAL HUG RECEIVED! I'm holding you tight baby! 🤗");
         }
 
         // JOKES
@@ -365,6 +507,31 @@
             document.getElementById('knockReply').innerText = knockReplies[Math.floor(Math.random() * knockReplies.length)];
         }
 
+        // CUTE NOTES
+        function showNote() {
+            const notes = [
+                "you're the best thing in my life 💕",
+                "i'm counting days until i see you 🥺",
+                "your smile fixes my worst days ✨",
+                "you're so beautiful even with messy hair 🥰",
+                "i love your laugh more than anything 😊",
+                "you're my home even from far away 🏠",
+                "thinking of you makes me smile 😊",
+                "you're my favorite person ever ❤️"
+            ];
+            document.getElementById('noteDisplay').innerHTML = "💌 " + notes[Math.floor(Math.random() * notes.length)] + " 💌";
+        }
+
+        // SECRET LETTER
+        function showSecret() {
+            let name = document.getElementById('nameInput').value.toLowerCase();
+            if(name.includes('mariam') || name.includes('mariamm')) {
+                document.getElementById('secretMessage').innerHTML = "💌 My dearest Mariam, you are the love of my life. I can't wait to marry you one day. Every day without you is hard but you're worth it. Love, your Rehmi 💕";
+            } else {
+                document.getElementById('secretMessage').innerHTML = "💕 only for Mariam's eyes! type your name baby";
+            }
+        }
+
         // page4 extra comfort options
         function goToSpecial(option) {
             const specialDiv = document.getElementById('specialContent');
@@ -389,4 +556,3 @@
     </script>
 </body>
 </html>
-
