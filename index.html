@@ -214,7 +214,7 @@
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="goToPage(2)">💝 comfort zone</button>
                 <button class="nav-btn" onclick="goToPage(3)">😂 jokes for cramps</button>
-                <button class="nav-btn" onclick="goToPage(4)">🌺 page of options</button>
+                <button class="nav-btn" onclick="goToPage(4)">🌺 hear my voice</button>
                 <button class="nav-btn" onclick="goToPage(5)">📸 last page</button>
             </div>
             <div class="candy-emoji">🍬 🍡 🍭 🍫 🍵</div>
@@ -241,7 +241,7 @@
             <button class="nav-btn" onclick="goToPage(1)">« back home</button>
         </div>
 
-        <!-- PAGE 3 - jokes & play (ALL NEW JOKES + KNOCK KNOCK) -->
+        <!-- PAGE 3 - jokes & play -->
         <div id="page3" class="page">
             <h2>😂 cramps killer: laughs</h2>
             <div class="joke-box" id="jokeDisplay">
@@ -258,25 +258,43 @@
             <button class="nav-btn" onclick="goToPage(1)">« back home</button>
         </div>
 
-        <!-- PAGE 4 - extra options (replaced playlist & cats with voice note + cuddle checklist) -->
+        <!-- PAGE 4 - VOICE NOTE PAGE (4 METHODS) -->
         <div id="page4" class="page">
-            <h2>🍭 pick your distraction</h2>
-            <div class="option-grid">
-                <div class="option-card" onclick="goToSpecial('voice')">🎤 my voice note</div>
-                <div class="option-card" onclick="goToSpecial('breathing')">🌬️ breathe with me</div>
-                <div class="option-card" onclick="goToSpecial('letter')">💌 a tiny letter</div>
-                <div class="option-card" onclick="goToSpecial('cuddles')">🧸 cuddle checklist</div>
+            <h2>🎤 hear my voice sweetheart</h2>
+            
+            <!-- METHOD 1: SoundCloud Embed -->
+            <div style="background: #ffd5e2; border-radius: 30px; padding: 15px; margin: 15px 0; width: 100%;">
+                <p style="font-size:1.2rem; color:#a13057; font-weight:bold;">🎵 Method 1: Play on SoundCloud</p>
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
+                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2266537652&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=false">
+                </iframe>
+                <p style="font-size:0.9rem; margin-top:5px;">⬆️ Press play button above ⬆️</p>
             </div>
+            
+            
+            </div>
+            
+            <!-- Extra comfort options -->
+            <div style="margin-top: 20px; width:100%;">
+                <h3 style="color:#b3446c;">also for you...</h3>
+                <div class="option-grid">
+                    <div class="option-card" onclick="goToSpecial('breathing')">🌬️ breathe with me</div>
+                    <div class="option-card" onclick="goToSpecial('letter')">💌 tiny letter</div>
+                    <div class="option-card" onclick="goToSpecial('cuddles')">🧸 cuddle checklist</div>
+                </div>
+            </div>
+            
             <div id="specialContent" style="background: #ffdde8; border-radius: 40px; padding: 25px; margin: 25px 0; width:100%; border: 4px dotted #ff9ebc;">
                 💫 you're magic. choose something lovely.
             </div>
+            
             <button class="nav-btn" onclick="goToPage(1)">« back home</button>
         </div>
 
         <!-- PAGE 5 - last page with period.PNG -->
         <div id="page5" class="page">
             <h2>🐣 you + me = endless love</h2>
-            <!-- here is your image: period.PNG (i added extra cute border) -->
+            <!-- here is your image: period.PNG -->
             <img src="period.PNG" alt="us / my girl" class="period-img" onerror="this.src='https://placekitten.com/400/300?image=12'; this.alt='cute kitty placeholder (period.PNG not found)'">
             <div class="cute-message" style="padding: 1rem;">
                 <p>i wish i could be next to you, holding you. <br> 
@@ -296,11 +314,9 @@
     <script>
         // simple page routing
         function goToPage(pageNumber) {
-            // hide all pages
             document.querySelectorAll('.page').forEach(p => {
                 p.classList.remove('active-page');
             });
-            // show selected
             const activePage = document.getElementById('page' + pageNumber);
             if (activePage) activePage.classList.add('active-page');
         }
@@ -317,7 +333,7 @@
             }
         }
 
-        // ================== NEW JOKES (unfunny but funny) ==================
+        // JOKES
         const jokeList = [
             'what do you call a bear with no teeth? 🐻 → a gummy bear! 😄',
             'why did the scarecrow win an award? 🌾 → because he was outstanding in his field!',
@@ -330,12 +346,13 @@
             'what do you call a fish with no eyes? 🐠 → a fsh! (get it? no i’s)',
             'why did the math book look so sad? 📘 → because it had too many problems!'
         ];
+        
         function newJoke() {
             const randomIndex = Math.floor(Math.random() * jokeList.length);
             document.getElementById('jokeDisplay').innerText = jokeList[randomIndex];
         }
 
-        // ================== NEW KNOCK KNOCK JOKES (sweet & silly) ==================
+        // KNOCK KNOCK JOKES
         function knockKnock() {
             const knockReplies = [
                 'Knock knock. who’s there? 🦋 Olive. Olive who? Olive you and I miss you!',
@@ -343,30 +360,18 @@
                 'Knock knock. who’s there? 🍪 Cookie. Cookie who? Cookie monster says you’re the sweetest!',
                 'Knock knock. who’s there? 👶 Yoda. Yoda who? Yoda one for me, baby!',
                 'Knock knock. who’s there? 🐌 Snail. Snail who? Snail mail — but i got here faster because i love you!',
-                'Knock knock. who’s there? 💋 Kiss. Kiss who? Kiss me, I’m (not) Irish, just your Valentine!'
+                'Knock knock. who’s there? 💋 Kiss. Kiss who? Kiss me, I’m your Valentine!'
             ];
             document.getElementById('knockReply').innerText = knockReplies[Math.floor(Math.random() * knockReplies.length)];
         }
 
-        // page4 special options (voice note + new stuff)
+        // page4 extra comfort options
         function goToSpecial(option) {
             const specialDiv = document.getElementById('specialContent');
-            if (option === 'voice') {
-                // Added your voice note player (replace the src with your file)
-                specialDiv.innerHTML = `
-                    <div class="voice-note">
-                        <p>🎤 a message i saved just for you, my Mariam ❤️</p>
-                        <audio controls>
-                            <source src="my-voice-note.m4a" type="audio/mpeg">
-                            your browser doesn't support audio — but imagine my voice saying "i love you"
-                        </audio>
-                        <p style="font-size:1rem; margin-top:10px;">(from months ago, but still all true)</p>
-                    </div>
-                `;
-            } else if (option === 'breathing') {
+            if (option === 'breathing') {
                 specialDiv.innerHTML = '🌬️ let’s breathe together: inhale 4 sec, hold 4, exhale 6. <br> 💫 i’m doing it with you right now. in…. out…. 💫';
             } else if (option === 'letter') {
-                specialDiv.innerHTML = '💌 My dear Mariam, <br> you are so strong. even when you feel weak, you shine. even when you feel dull, You r THE MOST BEAUTIFUL GIRL EVER, i miss you extra today. i can’t wait until we’re together and i can bring your favourite chocolates, and some pulao and we shop together, hehe i love you so much. forever yours, Rehmi. ✨';
+                specialDiv.innerHTML = '💌 My dear Mariam, <br> you are so strong. even when you feel weak, you shine. even when you feel dull, You are THE MOST BEAUTIFUL GIRL EVER, i miss you extra today. i can’t wait until we’re together and i can bring your favourite chocolates, and some pulao and we shop together, hehe i love you so much. forever yours, Rehmi. ✨';
             } else if (option === 'cuddles') {
                 specialDiv.innerHTML = '🧸 today\'s cuddle checklist: <br> ✓ 3 warm thoughts of us <br> ✓ 2 deep breaths with my name <br> ✓ 1 cozy blanket burrito <br> ✓ unlimited virtual forehead kisses 💋';
             }
@@ -379,10 +384,8 @@
 
         // set default joke
         window.onload = function() {
-            newJoke(); // initial joke
+            newJoke();
         };
     </script>
-    <!-- note: replace "my-voice-note.m4a" with your actual audio file name (e.g., "valentine-message.m4a") -->
-    <!-- also if period.PNG not found, shows placeholder but you have it -->
 </body>
 </html>
